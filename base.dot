@@ -1,0 +1,13 @@
+digraph {
+    0 [label=base];
+    1 [label="ghc-prim"];
+    2 [label="integer-gmp"];
+    3 [label="integer-simple"];
+    4 [label=rts];
+    0 -> 1;
+    0 -> 2;
+    0 -> 3;
+    0 -> 4;
+    1 -> 4;
+    2 -> 1;
+}
