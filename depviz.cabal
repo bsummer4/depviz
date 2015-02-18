@@ -21,3 +21,4 @@ executable depviz
                ,       graphviz
                ,       hackage-db
                ,       text
+               ,       optparse-applicative
