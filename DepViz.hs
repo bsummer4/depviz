@@ -66,9 +66,15 @@ graphDeps = snd . loop (S.empty,S.empty)
                   dive = L.foldl' loop (S.insert n seen, S.union edges gr) deps
                   alreadySeen = S.member n seen
 
+justLibs ∷ GenericPackageDescription → PackageDescription
+justLibs gpd = flattenPackageDescription $ gpd
+           { condTestSuites = []
+           , condBenchmarks = []
+           }
+
 pkgDeps ∷ GenericPackageDescription → [Text]
 pkgDeps gdesc = depName <$> buildDepends desc
-  where desc = flattenPackageDescription gdesc
+  where desc = justLibs gdesc
         depName (Dependency nm _) = T.pack $ display nm
 
 lookupDepTree ∷ Hackage -> Text → DepTree
